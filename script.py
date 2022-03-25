@@ -7,8 +7,10 @@ from datetime import date, datetime
 import time
 
 pd.set_option('display.max_rows', None)
+print('Running...')
 
 URLs = [
+    "https://www.oryxspioenkop.com/2022/02/attack-on-europe-documenting-equipment.html", # Current version
     "https://web.archive.org/web/20220224231142/https://www.oryxspioenkop.com/2022/02/attack-on-europe-documenting-equipment.html", # Feb 24 - 23:11:42 UTC
     "https://web.archive.org/web/20220225233528/https://www.oryxspioenkop.com/2022/02/attack-on-europe-documenting-equipment.html", # Feb 25 - 23:35:28 UTC
     "https://web.archive.org/web/20220226185336/https://www.oryxspioenkop.com/2022/02/attack-on-europe-documenting-equipment.html", # Feb 26 - 18:53:36 UTC
@@ -37,7 +39,7 @@ URLs = [
     "https://web.archive.org/web/20220321235106/https://www.oryxspioenkop.com/2022/02/attack-on-europe-documenting-equipment.html", # Mar 21 - 23:51:06 UTC
     "https://web.archive.org/web/20220322205154/https://www.oryxspioenkop.com/2022/02/attack-on-europe-documenting-equipment.html", # Mar 22 - 20:51:54 UTC
     "https://web.archive.org/web/20220323230032/https://www.oryxspioenkop.com/2022/02/attack-on-europe-documenting-equipment.html", # Mar 23 - 23:00:32 UTC
-    "https://www.oryxspioenkop.com/2022/02/attack-on-europe-documenting-equipment.html", # Current version
+    "https://web.archive.org/web/20220324205345/https://www.oryxspioenkop.com/2022/02/attack-on-europe-documenting-equipment.html", # Mar 24 - 20:53:45 UTC
 ]
 
 for url in (URLs):

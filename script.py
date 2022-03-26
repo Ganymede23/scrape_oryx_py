@@ -232,7 +232,7 @@ for url in (URLs):
     #Console log purposes
     time_counter = (datetime.now() - time_counter_start).total_seconds()
     dt_string = source_date.strftime("%B %d, %Y")
-    print(' -', dt_string, 'scrapped in', round(time_counter,2), 'seconds')
+    print(' -', dt_string, 'scraped in', round(time_counter,2), 'seconds')
 
     #Export
     df = pd.DataFrame(list_tmp, columns=['country', 'equipment_type', 'equipment_subtype', 'status', 'source', 'date'])

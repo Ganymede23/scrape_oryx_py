@@ -39,7 +39,8 @@ URLs = [
     "https://web.archive.org/web/20220321235106/https://www.oryxspioenkop.com/2022/02/attack-on-europe-documenting-equipment.html", # Mar 21 - 23:51:06 UTC
     "https://web.archive.org/web/20220322205154/https://www.oryxspioenkop.com/2022/02/attack-on-europe-documenting-equipment.html", # Mar 22 - 20:51:54 UTC
     "https://web.archive.org/web/20220323230032/https://www.oryxspioenkop.com/2022/02/attack-on-europe-documenting-equipment.html", # Mar 23 - 23:00:32 UTC
-    "https://web.archive.org/web/20220324205345/https://www.oryxspioenkop.com/2022/02/attack-on-europe-documenting-equipment.html", # Mar 24 - 20:53:45 UTC
+    "https://web.archive.org/web/20220324235259/https://www.oryxspioenkop.com/2022/02/attack-on-europe-documenting-equipment.html", # Mar 24 - 23:52:59 UTC
+    "https://web.archive.org/web/20220325210641/https://www.oryxspioenkop.com/2022/02/attack-on-europe-documenting-equipment.html", # Mar 25 - 21:06:41 UTC
 ]
 
 for url in (URLs):
@@ -215,11 +216,11 @@ for url in (URLs):
                                     current_a_text = re.sub(r"^\s", "", current_a_text)
                                     if status_i == current_a_text:
                                         for x in range(0, report_numbers_count):
-                                            if url != "https://www.oryxspioenkop.com/2022/02/attack-on-europe-documenting-equipment.html":
+                                            if "https://web.archive.org/web/" in single_report['href']: #If the link is from Web Archive, deletes the first part of it.
                                                 list_tmp.append([country, current_type, current_subtype, current_a_text, single_report['href'][43:], source_date.strftime("%d-%m-%Y")])
                                                 #[43:] removes the web.archive.org part from the links
                                             else:
-                                                list_tmp.append([country, current_type, current_subtype, current_a_text, single_report['href'], source_date.strftime("%d-%m-%Y")])
+                                                list_tmp.append([country, current_type, current_subtype, current_a_text, single_report['href'].strip(), source_date.strftime("%d-%m-%Y")])
                                 except Exception as e:
                                     #print(e)
                                     pass

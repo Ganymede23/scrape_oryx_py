@@ -11,8 +11,11 @@ print('Running...')
 
 URLs = [
     "https://www.oryxspioenkop.com/2022/02/attack-on-europe-documenting-equipment.html", # Current version
+    "https://web.archive.org/web/20220330195221/https://www.oryxspioenkop.com/2022/02/attack-on-europe-documenting-equipment.html", # Mar 30 - 19:52:21 UTC
+    "https://web.archive.org/web/20220329202039/https://www.oryxspioenkop.com/2022/02/attack-on-europe-documenting-equipment.html", # Mar 29 - 20:20:39 UTC
+    "https://web.archive.org/web/20220328205313/https://www.oryxspioenkop.com/2022/02/attack-on-europe-documenting-equipment.html", # Mar 28 - 20:53:13 UTC
     "https://web.archive.org/web/20220327235658/https://www.oryxspioenkop.com/2022/02/attack-on-europe-documenting-equipment.html", # Mar 27 - 23:56:58 UTC
-    "https://web.archive.org/web/20220326183518/https://www.oryxspioenkop.com/2022/02/attack-on-europe-documenting-equipment.html", # Mar 26 - 18:35:18 UTC
+    "https://web.archive.org/web/20220326220720/https://www.oryxspioenkop.com/2022/02/attack-on-europe-documenting-equipment.html", # Mar 26 - 22:07:20 UTC
     "https://web.archive.org/web/20220325232201/https://www.oryxspioenkop.com/2022/02/attack-on-europe-documenting-equipment.html", # Mar 25 - 23:22:01 UTC
     "https://web.archive.org/web/20220324235259/https://www.oryxspioenkop.com/2022/02/attack-on-europe-documenting-equipment.html", # Mar 24 - 23:52:59 UTC
     "https://web.archive.org/web/20220323230032/https://www.oryxspioenkop.com/2022/02/attack-on-europe-documenting-equipment.html", # Mar 23 - 23:00:32 UTC

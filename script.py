@@ -3,52 +3,15 @@ from bs4 import BeautifulSoup
 import pandas as pd
 import re
 import os
-from datetime import date, datetime
+from datetime import date, datetime, timedelta
 import time
+from urls import URLs
 
 pd.set_option('display.max_rows', None)
 print('Running...')
 
-URLs = [
-    "https://www.oryxspioenkop.com/2022/02/attack-on-europe-documenting-equipment.html", # Current version
-    "https://web.archive.org/web/20220330195221/https://www.oryxspioenkop.com/2022/02/attack-on-europe-documenting-equipment.html", # Mar 30 - 19:52:21 UTC
-    "https://web.archive.org/web/20220329202039/https://www.oryxspioenkop.com/2022/02/attack-on-europe-documenting-equipment.html", # Mar 29 - 20:20:39 UTC
-    "https://web.archive.org/web/20220328205313/https://www.oryxspioenkop.com/2022/02/attack-on-europe-documenting-equipment.html", # Mar 28 - 20:53:13 UTC
-    "https://web.archive.org/web/20220327235658/https://www.oryxspioenkop.com/2022/02/attack-on-europe-documenting-equipment.html", # Mar 27 - 23:56:58 UTC
-    "https://web.archive.org/web/20220326220720/https://www.oryxspioenkop.com/2022/02/attack-on-europe-documenting-equipment.html", # Mar 26 - 22:07:20 UTC
-    "https://web.archive.org/web/20220325232201/https://www.oryxspioenkop.com/2022/02/attack-on-europe-documenting-equipment.html", # Mar 25 - 23:22:01 UTC
-    "https://web.archive.org/web/20220324235259/https://www.oryxspioenkop.com/2022/02/attack-on-europe-documenting-equipment.html", # Mar 24 - 23:52:59 UTC
-    "https://web.archive.org/web/20220323230032/https://www.oryxspioenkop.com/2022/02/attack-on-europe-documenting-equipment.html", # Mar 23 - 23:00:32 UTC
-    "https://web.archive.org/web/20220322205154/https://www.oryxspioenkop.com/2022/02/attack-on-europe-documenting-equipment.html", # Mar 22 - 20:51:54 UTC
-    "https://web.archive.org/web/20220321235106/https://www.oryxspioenkop.com/2022/02/attack-on-europe-documenting-equipment.html", # Mar 21 - 23:51:06 UTC
-    "https://web.archive.org/web/20220320235959/https://www.oryxspioenkop.com/2022/02/attack-on-europe-documenting-equipment.html", # Mar 20 - 23:59:59 UTC
-    "https://web.archive.org/web/20220319224651/https://www.oryxspioenkop.com/2022/02/attack-on-europe-documenting-equipment.html", # Mar 19 - 22:46:51 UTC
-    "https://web.archive.org/web/20220318215226/https://www.oryxspioenkop.com/2022/02/attack-on-europe-documenting-equipment.html", # Mar 18 - 21:52:26 UTC
-    "https://web.archive.org/web/20220317233941/https://www.oryxspioenkop.com/2022/02/attack-on-europe-documenting-equipment.html", # Mar 17 - 23:39:41 UTC
-    "https://web.archive.org/web/20220316230757/https://www.oryxspioenkop.com/2022/02/attack-on-europe-documenting-equipment.html", # Mar 16 - 23:07:57 UTC
-    "https://web.archive.org/web/20220315235520/https://www.oryxspioenkop.com/2022/02/attack-on-europe-documenting-equipment.html", # Mar 15 - 23:55:20 UTC
-    "https://web.archive.org/web/20220314190653/https://www.oryxspioenkop.com/2022/02/attack-on-europe-documenting-equipment.html", # Mar 14 - 19:06:53 UTC
-    "https://web.archive.org/web/20220313230901/https://www.oryxspioenkop.com/2022/02/attack-on-europe-documenting-equipment.html", # Mar 13 - 23:09:01 UTC
-    "https://web.archive.org/web/20220312213558/https://www.oryxspioenkop.com/2022/02/attack-on-europe-documenting-equipment.html", # Mar 12 - 21:35:58 UTC
-    "https://web.archive.org/web/20220311205005/https://www.oryxspioenkop.com/2022/02/attack-on-europe-documenting-equipment.html", # Mar 11 - 20:50:05 UTC
-    "https://web.archive.org/web/20220310235649/https://www.oryxspioenkop.com/2022/02/attack-on-europe-documenting-equipment.html", # Mar 10 - 23:56:49 UTC
-    "https://web.archive.org/web/20220309213817/https://www.oryxspioenkop.com/2022/02/attack-on-europe-documenting-equipment.html", # Mar 9  - 21:38:17 UTC
-    "https://web.archive.org/web/20220308204303/https://www.oryxspioenkop.com/2022/02/attack-on-europe-documenting-equipment.html", # Mar 8  - 20:43:03 UTC
-    "https://web.archive.org/web/20220307220942/https://www.oryxspioenkop.com/2022/02/attack-on-europe-documenting-equipment.html", # Mar 7  - 22:09:42 UTC
-    "https://web.archive.org/web/20220306225654/https://www.oryxspioenkop.com/2022/02/attack-on-europe-documenting-equipment.html", # Mar 6  - 22:56:54 UTC
-    "https://web.archive.org/web/20220305211400/https://www.oryxspioenkop.com/2022/02/attack-on-europe-documenting-equipment.html", # Mar 5  - 21:14:00 UTC
-    "https://web.archive.org/web/20220304235636/https://www.oryxspioenkop.com/2022/02/attack-on-europe-documenting-equipment.html", # Mar 4  - 23:56:36 UTC
-    "https://web.archive.org/web/20220303195838/https://www.oryxspioenkop.com/2022/02/attack-on-europe-documenting-equipment.html", # Mar 3  - 19:58:38 UTC
-    "https://web.archive.org/web/20220302205559/https://www.oryxspioenkop.com/2022/02/attack-on-europe-documenting-equipment.html", # Mar 2  - 20:55:59 UTC
-    "https://web.archive.org/web/20220301185329/https://www.oryxspioenkop.com/2022/02/attack-on-europe-documenting-equipment.html", # Mar 1  - 18:53:29 UTC
-    "https://web.archive.org/web/20220228231935/https://www.oryxspioenkop.com/2022/02/attack-on-europe-documenting-equipment.html", # Feb 28 - 23:19:35 UTC
-    "https://web.archive.org/web/20220227214345/https://www.oryxspioenkop.com/2022/02/attack-on-europe-documenting-equipment.html", # Feb 27 - 21:43:45 UTC
-    "https://web.archive.org/web/20220226185336/https://www.oryxspioenkop.com/2022/02/attack-on-europe-documenting-equipment.html", # Feb 26 - 18:53:36 UTC
-    "https://web.archive.org/web/20220225233528/https://www.oryxspioenkop.com/2022/02/attack-on-europe-documenting-equipment.html", # Feb 25 - 23:35:28 UTC
-    "https://web.archive.org/web/20220224231142/https://www.oryxspioenkop.com/2022/02/attack-on-europe-documenting-equipment.html", # Feb 24 - 23:11:42 UTC
-]
-
-for url in (URLs):
+for item in URLs:
+    url, actual_date = item
     time_counter_start = datetime.now()
     page = requests.get(url)
     soup = BeautifulSoup(page.content, "html.parser")
@@ -56,6 +19,8 @@ for url in (URLs):
 
     if url != "https://www.oryxspioenkop.com/2022/02/attack-on-europe-documenting-equipment.html":
         source_date = datetime(year=int(url[28:32]), month=int(url[32:34]), day=int(url[34:36]))
+        if not actual_date: # Assigns previous date in case the next day URL was used
+            source_date -= timedelta(days=1)
     else:
         source_date = datetime.utcnow()
  
@@ -245,7 +210,6 @@ for url in (URLs):
     df
 
     cwd = os.getcwd()
-    now = datetime.now()
     dt_string = source_date.strftime("%Y-%m-%d")
     path = cwd + '\output_files' + '/' + dt_string + '.csv'
     df.to_csv(path)

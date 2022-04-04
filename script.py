@@ -187,7 +187,7 @@ for item in URLs:
                                     if status_i == current_a_text:
                                         for x in range(0, report_numbers_count):
                                             if "https://web.archive.org/web/" in single_report['href']: #If the link is from Web Archive, deletes the first part of it.
-                                                list_tmp.append([country, current_type, current_subtype, current_a_text, single_report['href'][43:], source_date.strftime("%d-%m-%Y")])
+                                                list_tmp.append([country, current_type, current_subtype, current_a_text, single_report['href'][43:].strip(), source_date.strftime("%d-%m-%Y")])
                                                 #[43:] removes the web.archive.org part from the links
                                             else:
                                                 list_tmp.append([country, current_type, current_subtype, current_a_text, single_report['href'].strip(), source_date.strftime("%d-%m-%Y")])

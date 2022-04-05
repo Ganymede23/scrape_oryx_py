@@ -1,5 +1,6 @@
 URLs = [
     ["https://www.oryxspioenkop.com/2022/02/attack-on-europe-documenting-equipment.html", True], # Current version
+    ["https://web.archive.org/web/20220404220900/https://www.oryxspioenkop.com/2022/02/attack-on-europe-documenting-equipment.html", True], # Apr 4  - 22:09:00 UTC
     ["https://web.archive.org/web/20220403225440/https://www.oryxspioenkop.com/2022/02/attack-on-europe-documenting-equipment.html", True], # Apr 3  - 22:54:40 UTC
     ["https://web.archive.org/web/20220402220455/https://www.oryxspioenkop.com/2022/02/attack-on-europe-documenting-equipment.html", True], # Apr 2  - 22:04:55 UTC
     ["https://web.archive.org/web/20220401220928/https://www.oryxspioenkop.com/2022/02/attack-on-europe-documenting-equipment.html", True], # Apr 1  - 22:09:28 UTC

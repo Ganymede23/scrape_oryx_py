@@ -1,3 +1,5 @@
+from dataclasses import replace
+from operator import contains
 import requests
 from bs4 import BeautifulSoup
 import pandas as pd
@@ -93,6 +95,7 @@ for item in URLs:
             status_types_auto_tmp.append([status])
 
     # Gets rid of repeated elements
+    
     for i in status_types_auto_tmp:
         if i[0] not in status_types_auto:
             status_types_auto.append(i[0])
@@ -166,6 +169,10 @@ for item in URLs:
                             for single_report in li_a_list:
 
                                 current_a_text = single_report.get_text()
+
+                                # Fix in case there is an additional comma on a status/source list
+                                if ', and ' in current_a_text:
+                                    current_a_text = current_a_text.replace(', and ', ' and ')
 
                                 report_numbers = re.search(r"((?:\d+,\s*)+\d+\sand\s\d+|\d+,|\d+\sand\s\d+)", current_a_text)
 
